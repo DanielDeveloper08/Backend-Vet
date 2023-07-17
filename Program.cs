@@ -1,4 +1,5 @@
 using BACK_CRUD_Mascota.Models;
+using BACK_CRUD_Mascota.Models.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,12 @@ builder.Services.AddCors(options => options.AddPolicy("AllowWebapp",
                                     builder => builder.AllowAnyOrigin()
                                                     .AllowAnyHeader()
                                                     .AllowAnyMethod()));
+
+//Automapper
+builder.Services.AddAutoMapper(typeof(Program));
+
+//AddServices
+builder.Services.AddScoped<IPetRepository, PetRepository>();
 
 // ADD CONTEXT
 builder.Services.AddDbContext<AplicationDbContext>(options =>
